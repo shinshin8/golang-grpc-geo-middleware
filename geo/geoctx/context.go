@@ -1,4 +1,4 @@
-package ctxgeo
+package geoctx
 
 import "context"
 
