@@ -15,8 +15,6 @@ func DemoServerInterceptor(d string) grpc.UnaryServerInterceptor {
 
 		v := democtx.GetDemo(ctx)
 
-		fmt.Printf("before: %s", v)
-
 		var val string
 		if v == "" {
 			val = d
@@ -24,9 +22,7 @@ func DemoServerInterceptor(d string) grpc.UnaryServerInterceptor {
 			val = fmt.Sprintf("%s, %s", v, d)
 		}
 
-		fmt.Printf("after %s", val)
-
-		democtx.SetDemo(ctx, val)
+		ctx = democtx.SetDemo(ctx, val)
 
 		return handler(ctx, req)
 	}
