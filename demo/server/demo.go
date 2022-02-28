@@ -11,7 +11,7 @@ import (
 
 // DemoServerInterceptor returns a new unary interceptor that put email address into a context.
 func DemoServerInterceptor(d string) grpc.UnaryServerInterceptor {
-	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 
 		v := democtx.GetDemo(ctx)
 
@@ -24,6 +24,6 @@ func DemoServerInterceptor(d string) grpc.UnaryServerInterceptor {
 
 		democtx.SetDemo(ctx, val)
 
-		return handler(ctx, err)
+		return handler(ctx, req)
 	}
 }
