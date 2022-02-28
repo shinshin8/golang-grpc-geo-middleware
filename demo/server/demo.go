@@ -22,8 +22,6 @@ func DemoServerInterceptor(d string) grpc.UnaryServerInterceptor {
 			val = fmt.Sprintf("%s, %s", v, d)
 		}
 
-		fmt.Println(val)
-
 		democtx.SetDemo(ctx, val)
 
 		return handler(ctx, req)
