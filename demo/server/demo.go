@@ -27,3 +27,13 @@ func DemoServerInterceptor(d string) grpc.UnaryServerInterceptor {
 		return handler(ctx, req)
 	}
 }
+
+func DemoErrorServerIntercepor() grpc.UnaryServerInterceptor {
+	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+		resp, err = handler(ctx, req)
+		if err != nil {
+			fmt.Sprintf("発生したエラーです。： %s", err.Error())
+		}
+		return resp, err
+	}
+}
